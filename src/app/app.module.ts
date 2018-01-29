@@ -10,6 +10,7 @@ import { AdminComponent } from './admin/admin.component';
 import { BlogComponent } from './blog/blog.component';
 import { ConcertComponent } from './concert/concert.component';
 import { SongsComponent } from './songs/songs.component';
+import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'concert', component: ConcertComponent },
 	{ path: 'songs', component: SongsComponent },
+	{ path: 'contact', component: ContactComponent },
 	/*{ path: 'hero/:id',      component: HeroDetailComponent },
 	{
 		path: 'heroes',
@@ -45,6 +47,7 @@ const appRoutes: Routes = [
 			BlogComponent,
 			ConcertComponent,
 			SongsComponent,
+			ContactComponent,
 			PageNotFoundComponent
 		],
 	imports: [
