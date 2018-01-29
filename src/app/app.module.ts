@@ -13,6 +13,11 @@ import { SongsComponent } from './songs/songs.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -53,6 +58,10 @@ const appRoutes: Routes = [
 	imports: [
 		RouterModule.forRoot(appRoutes,{ enableTracing: true }),
 		BrowserModule,
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFirestoreModule, // imports firebase/firestore, only needed for database features
+		AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
+		AngularFireStorageModule, // imports firebase/storage only needed for storage features
 		CollapseModule.forRoot(),
 		BsDropdownModule.forRoot()
 	],
