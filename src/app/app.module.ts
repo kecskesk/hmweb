@@ -11,6 +11,7 @@ import { BlogComponent } from './blog/blog.component';
 import { ConcertComponent } from './concert/concert.component';
 import { SongsComponent } from './songs/songs.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -48,7 +49,9 @@ const appRoutes: Routes = [
 		],
 	imports: [
 		RouterModule.forRoot(appRoutes,{ enableTracing: true }),
-		BrowserModule
+		BrowserModule,
+		CollapseModule.forRoot(),
+		BsDropdownModule.forRoot()
 	],
 	providers: [],
 	bootstrap: [AppComponent]
