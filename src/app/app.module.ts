@@ -22,16 +22,32 @@ import { environment } from '../environments/environment';
 import { FireDatabaseService } from './common/fire-database.service';
 import { DictionaryPipe } from './common/dictionary.pipe';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { AuthService } from './common/auth.service';
+import { AuthGuard } from './common/auth-guard.service';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { AdminBioComponent } from './admin/admin-bio/admin-bio.component';
+import { AdminBlogComponent } from './admin/admin-blog/admin-blog.component';
+import { AdminConcertComponent } from './admin/admin-concert/admin-concert.component';
+import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'bio', component: BioComponent },
 	{ path: 'gallery', component: GalleryComponent },
-	{ path: 'admin', component: AdminComponent },
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'concert', component: ConcertComponent },
 	{ path: 'songs', component: SongsComponent },
 	{ path: 'contact', component: ContactComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+		children: [
+		{ path: '', redirectTo: 'bio', pathMatch: 'full' },
+		{ path: 'bio', component: AdminBioComponent },
+		{ path: 'blog', component: AdminBlogComponent },
+		{ path: 'concert', component: AdminConcertComponent },
+		{ path: 'songs', component: AdminSongsComponent },
+	  ]},
 	/*{ path: 'hero/:id',      component: HeroDetailComponent },
 	{
 		path: 'heroes',
@@ -58,9 +74,15 @@ const appRoutes: Routes = [
 			SongsComponent,
 			ContactComponent,
 			PageNotFoundComponent,
-			DictionaryPipe
+			LoginComponent,
+			DictionaryPipe,
+			AdminConcertComponent,
+			AdminBioComponent,
+			AdminBlogComponent,
+			AdminSongsComponent
 		],
 	imports: [
+		FormsModule,
 		RouterModule.forRoot(appRoutes),
 		BrowserModule,
 		AngularFireModule.initializeApp(environment.firebase),
@@ -73,7 +95,9 @@ const appRoutes: Routes = [
 		NgxGalleryModule
 	],
 	providers: [
-		FireDatabaseService
+		FireDatabaseService,
+		AuthService,
+		AuthGuard
 	],
 	bootstrap: [AppComponent]
 })

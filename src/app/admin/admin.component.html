@@ -1,3 +1,11 @@
-<p>
-  admin works!
-</p>
+<div class="admin-page">
+  <button class="btn btn-danger logout-button" (click)="logout()">Kijelentkezés</button>
+  <h1>Admin felület</h1>
+
+  <ul class="nav nav-tabs">
+    <li *ngFor="let route of routes | dictionary" [class.active]="router.url === '/admin/' + route.key">
+        <a [routerLink]="route.key">{{route.value}}</a>
+      </li>
+  </ul>
+  <router-outlet></router-outlet>
+</div>
