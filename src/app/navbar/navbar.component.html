@@ -13,13 +13,13 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" [collapse]="isCollapsed" >
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-				<li><a href="/bio">Bemutatkozás</a></li>
-				<li><a href="/songs">Dalok</a></li>
-				<li><a href="/concert">Koncertek</a></li>
-				<li><a href="/blog">Blog</a></li>
-				<li><a href="/gallery">Galéria</a></li>
-				<li><a href="/contact">Kapcsolat</a></li>
+
+				<li *ngFor="let route of routes | dictionary" [class.active]="router.url === route.key">
+					<a [routerLink]="route.key" (click)="isCollapsed = true">
+						<span *ngIf="route.value">{{route.value}}</span>
+						<span *ngIf="!route.value"><i class="fa fa-home"></i></span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

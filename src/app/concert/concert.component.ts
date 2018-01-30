@@ -13,7 +13,6 @@ export class ConcertComponent implements OnInit {
 
 	constructor(dbService: FireDatabaseService) {
 		dbService.getObject('concerts').subscribe((result) => {
-			console.log(result);
 			this.concerts = result;
 		});
 	}
