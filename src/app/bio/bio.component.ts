@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import {FireDatabaseService} from '../common/fire-database.service';
 
 @Component({
   selector: 'app-bio',
@@ -9,14 +8,12 @@ import { Observable } from 'rxjs/Observable';
 })
 export class BioComponent implements OnInit {
   bio: any;
-  constructor(db: AngularFireDatabase) {
-    db.object('bio').valueChanges().subscribe((result)=> {
+  constructor(dbService: FireDatabaseService) {
+    dbService.getObject('bio').subscribe((result)=> {
         this.bio = result;
-        console.log(result);
     });
   }
 
   ngOnInit() {
   }
-
 }

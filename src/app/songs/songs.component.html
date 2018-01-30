@@ -1,3 +1,12 @@
-<p>
-  songs works!
-</p>
+<div>
+	<ul *ngFor="let album of albums | dictionary">
+		<li>
+			{{album.key}}
+			<ol>
+				<li *ngFor="let song of album.value | dictionary">
+					{{song.key}}
+				</li>
+			</ol>
+		</li>
+	</ul>
+</div>

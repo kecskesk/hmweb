@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FireDatabaseService} from '../common/fire-database.service';
+import {Dictionary} from '../common/dictionary';
 
 @Component({
   selector: 'app-songs',
@@ -6,8 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./songs.component.less']
 })
 export class SongsComponent implements OnInit {
+	albums: Dictionary<Dictionary<number>> = new Dictionary<Dictionary<number>>();
 
-  constructor() { }
+	constructor(dbService: FireDatabaseService) {
+		dbService.getObject('albums').subscribe((result)=> {
+			this.albums = result;
+		});
+	}
 
   ngOnInit() {
   }

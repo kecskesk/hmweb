@@ -14,11 +14,13 @@ import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { FireDatabaseService } from './common/fire-database.service';
+import {DictionaryPipe} from './common/dictionary.pipe';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -54,10 +56,11 @@ const appRoutes: Routes = [
 			ConcertComponent,
 			SongsComponent,
 			ContactComponent,
-			PageNotFoundComponent
+			PageNotFoundComponent,
+			DictionaryPipe
 		],
 	imports: [
-		RouterModule.forRoot(appRoutes,{ enableTracing: true }),
+		RouterModule.forRoot(appRoutes),
 		BrowserModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule, // imports firebase/firestore, only needed for database features
@@ -67,7 +70,9 @@ const appRoutes: Routes = [
 		CollapseModule.forRoot(),
 		BsDropdownModule.forRoot()
 	],
-	providers: [],
+	providers: [
+		FireDatabaseService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }
