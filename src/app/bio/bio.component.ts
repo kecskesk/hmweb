@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -8,10 +8,12 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./bio.component.less']
 })
 export class BioComponent implements OnInit {
-  bio: string;
-  data: Observable<any[]>;
-  constructor(db: AngularFirestore) {
-    this.data = db.collection('data').valueChanges();
+  bio: any;
+  constructor(db: AngularFireDatabase) {
+    db.object('bio').valueChanges().subscribe((result)=> {
+        this.bio = result;
+        console.log(result);
+    });
   }
 
   ngOnInit() {
