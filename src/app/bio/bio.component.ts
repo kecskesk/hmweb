@@ -9,7 +9,7 @@ import {FireDatabaseService} from '../common/fire-database.service';
 export class BioComponent implements OnInit {
   bio: any;
   constructor(dbService: FireDatabaseService) {
-    dbService.getObject('bio').subscribe((result)=> {
+    dbService.getObject('bio').subscribe((result) => {
         this.bio = result;
     });
   }
