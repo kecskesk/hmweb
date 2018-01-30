@@ -11,7 +11,7 @@ export class SongsComponent implements OnInit {
 	albums: Dictionary<Dictionary<number>> = new Dictionary<Dictionary<number>>();
 
 	constructor(dbService: FireDatabaseService) {
-		dbService.getObject('albums').subscribe((result)=> {
+		dbService.getObject('albums').subscribe((result) => {
 			this.albums = result;
 		});
 	}

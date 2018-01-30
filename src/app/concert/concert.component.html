@@ -1,3 +1,10 @@
-<p>
-  concert works!
-</p>
+<table class="table table-bordered table-striped">
+	<tr>
+		<th>Dátum</th>
+		<th>Helyszín</th>
+	</tr>
+	<tr *ngFor="let concert of concerts | dictionary">
+		<td>{{concert.value}}</td>
+		<td>{{concert.key}}</td>
+	</tr>
+</table>
