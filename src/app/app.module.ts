@@ -20,7 +20,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { FireDatabaseService } from './common/fire-database.service';
-import {DictionaryPipe} from './common/dictionary.pipe';
+import { DictionaryPipe } from './common/dictionary.pipe';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -68,7 +69,8 @@ const appRoutes: Routes = [
 		AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
 		AngularFireStorageModule, // imports firebase/storage only needed for storage features
 		CollapseModule.forRoot(),
-		BsDropdownModule.forRoot()
+		BsDropdownModule.forRoot(),
+		NgxGalleryModule
 	],
 	providers: [
 		FireDatabaseService
