@@ -7,16 +7,20 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './admin-bio.component.html',
   styleUrls: ['./admin-bio.component.less']
 })
-export class AdminBioComponent {
+export class AdminBioComponent implements OnInit {
   bio: string;
   savedAlert = false;
   errorAlert: string;
   bio_rows = 5;
 
-  constructor(private dbService: FireDatabaseService) {
-    dbService.getObject('bio').subscribe((result) => {
-        this.bio = result;
-        this.bio_rows = this.bio.split('\n').length + this.bio.length / 120;
+  constructor(private dbService: FireDatabaseService) {}
+
+  ngOnInit() {
+    this.dbService.getObject('bio').subscribe((result) => {
+      this.bio = result;
+      Observable.timer(20).subscribe(() => {
+        this.setHeight();
+      });
     });
   }
 
@@ -39,5 +43,9 @@ export class AdminBioComponent {
   closeAlert(): void {
     this.savedAlert = false;
     this.errorAlert = null;
+  }
+
+  setHeight(): void {
+    document.getElementById('bio').style.height = document.getElementById('bio').scrollHeight + 'px';
   }
 }

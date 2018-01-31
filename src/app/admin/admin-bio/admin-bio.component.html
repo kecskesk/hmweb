@@ -4,7 +4,7 @@
 
   <div class="form-group">
     <label for="comment">Tartalom:</label>
-    <textarea class="form-control" [rows]="bio_rows" name="bio" [(ngModel)]="bio" required></textarea>
+    <textarea class="form-control" id='bio' name="bio" [(ngModel)]="bio" (input)="setHeight()" required></textarea>
     <br/>
     <button class="btn btn-primary" (click)="sendBio()">Mentés</button>
     <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
