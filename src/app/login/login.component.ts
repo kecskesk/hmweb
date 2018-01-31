@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(event: Event) {
+  login() {
     this.authService.login(this.emailField, this.passwordField).catch(error => {
       if (error.message) {
         this.firebaseError = error;

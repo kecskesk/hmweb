@@ -14,8 +14,8 @@ export class AdminComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
     this.routes['bio'] = 'Bemutatkozás';
     this.routes['blog'] = 'Blog';
-    this.routes['concert'] = 'Koncertek';
     this.routes['songs'] = 'Dalok';
+    this.routes['concert'] = 'Koncertek';
   }
 
   ngOnInit() {
