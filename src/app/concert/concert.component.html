@@ -2,9 +2,15 @@
 	<tr>
 		<th>Dátum</th>
 		<th>Helyszín</th>
+		<th>Belépő</th>
+		<th>FB Event</th>
+		<th>Megjegyzések</th>
 	</tr>
 	<tr *ngFor="let concert of concerts | dictionary">
-		<td>{{concert.value}}</td>
-		<td>{{concert.key}}</td>
+		<td>{{concert.value.date | date:'y MMM d, H:mm'}}</td>
+		<td>{{concert.value.place}}</td>
+		<td>{{concert.value.entry}}</td>
+		<td><a *ngIf="concert.value.eventid" href="https://www.facebook.com/events/{{concert.value.eventid}}">Esemény oldal</a></td>
+		<td class="comment">{{concert.value.comment}}</td>
 	</tr>
 </table>

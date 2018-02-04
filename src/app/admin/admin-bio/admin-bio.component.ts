@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FireDatabaseService} from '../../common/fire-database.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AdminChildBaseComponent } from '../admin-child-base.component';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
@@ -7,18 +8,18 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: './admin-bio.component.html',
   styleUrls: ['./admin-bio.component.less']
 })
-export class AdminBioComponent implements OnInit {
+export class AdminBioComponent extends AdminChildBaseComponent implements OnInit {
   bio: string;
-  savedAlert = false;
-  errorAlert: string;
   bio_rows = 5;
 
-  constructor(private dbService: FireDatabaseService) {}
+  constructor(private db: AngularFireDatabase) {
+    super();
+  }
 
   ngOnInit() {
-    this.dbService.getObject('bio').subscribe((result) => {
-      this.bio = result;
-      Observable.timer(20).subscribe(() => {
+    this.db.object('bio').valueChanges().subscribe((result) => {
+      this.bio = result as string;
+      Observable.timer(200).subscribe(() => {
         this.setHeight();
       });
     });
@@ -26,7 +27,7 @@ export class AdminBioComponent implements OnInit {
 
   sendBio(): void {
     if (this.bio) {
-      this.dbService.saveObject('bio', this.bio).then(() => {
+      this.db.object('bio').set(this.bio).then(() => {
         this.savedAlert = true;
         Observable.timer(2000).subscribe(() => {
           this.savedAlert = false;
@@ -40,12 +41,10 @@ export class AdminBioComponent implements OnInit {
     }
   }
 
-  closeAlert(): void {
-    this.savedAlert = false;
-    this.errorAlert = null;
-  }
-
   setHeight(): void {
-    document.getElementById('bio').style.height = document.getElementById('bio').scrollHeight + 'px';
+    if (document.getElementById('bio')) {
+      document.getElementById('bio').style.height = 
+      document.getElementById('bio').scrollHeight + 'px';
+    }
   }
 }

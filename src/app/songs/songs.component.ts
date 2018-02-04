@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FireDatabaseService} from '../common/fire-database.service';
+import { AngularFireDatabase } from 'angularfire2/database';
+
 import {Dictionary} from '../common/dictionary';
 
 @Component({
@@ -9,10 +10,9 @@ import {Dictionary} from '../common/dictionary';
 })
 export class SongsComponent implements OnInit {
 	albums: Dictionary<Dictionary<number>> = new Dictionary<Dictionary<number>>();
-
-	constructor(dbService: FireDatabaseService) {
-		dbService.getObject('albums').subscribe((result) => {
-			this.albums = result;
+		constructor(db: AngularFireDatabase) {
+		db.object('albums').valueChanges().subscribe((result) => {
+			this.albums = result as Dictionary<any>;
 		});
 	}
 

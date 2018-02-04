@@ -30,6 +30,9 @@ import { AdminBioComponent } from './admin/admin-bio/admin-bio.component';
 import { AdminBlogComponent } from './admin/admin-blog/admin-blog.component';
 import { AdminConcertComponent } from './admin/admin-concert/admin-concert.component';
 import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -85,6 +88,7 @@ const appRoutes: Routes = [
 		FormsModule,
 		RouterModule.forRoot(appRoutes),
 		BrowserModule,
+		BrowserAnimationsModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule, // imports firebase/firestore, only needed for database features
 		AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
@@ -92,7 +96,9 @@ const appRoutes: Routes = [
 		AngularFireStorageModule, // imports firebase/storage only needed for storage features
 		CollapseModule.forRoot(),
 		BsDropdownModule.forRoot(),
-		NgxGalleryModule
+		NgxGalleryModule,
+		OwlDateTimeModule, 
+		OwlNativeDateTimeModule,
 	],
 	providers: [
 		FireDatabaseService,
