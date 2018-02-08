@@ -1,0 +1,16 @@
+<div class="admin-page">
+  <h1>Bemutatkozás szerkesztése</h1>
+  <hr/>
+
+  <div class="form-group">
+    <label for="comment">Tartalom:</label>
+    <textarea class="form-control" id='bio' name="bio" [(ngModel)]="bio" (input)="setHeight()" required></textarea>
+  </div>
+   
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="sendBio()">Mentés</button>
+    <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
+    <div type="alert alert-danger" close="closeAlert()" *ngIf="errorAlert">{{errorAlert}}</div>
+  </div>
+
+</div>

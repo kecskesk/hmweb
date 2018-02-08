@@ -20,17 +20,37 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { FireDatabaseService } from './common/fire-database.service';
-import {DictionaryPipe} from './common/dictionary.pipe';
+import { DictionaryPipe } from './common/dictionary.pipe';
+import { NgxGalleryModule } from 'ngx-gallery';
+import { AuthService } from './common/auth.service';
+import { AuthGuard } from './common/auth-guard.service';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
+import { AdminBioComponent } from './admin/admin-bio/admin-bio.component';
+import { AdminBlogComponent } from './admin/admin-blog/admin-blog.component';
+import { AdminConcertComponent } from './admin/admin-concert/admin-concert.component';
+import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 const appRoutes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'bio', component: BioComponent },
 	{ path: 'gallery', component: GalleryComponent },
-	{ path: 'admin', component: AdminComponent },
 	{ path: 'blog', component: BlogComponent },
 	{ path: 'concert', component: ConcertComponent },
 	{ path: 'songs', component: SongsComponent },
 	{ path: 'contact', component: ContactComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
+		children: [
+		{ path: '', redirectTo: 'bio', pathMatch: 'full' },
+		{ path: 'bio', component: AdminBioComponent },
+		{ path: 'blog', component: AdminBlogComponent },
+		{ path: 'concert', component: AdminConcertComponent },
+		{ path: 'songs', component: AdminSongsComponent },
+	  ]},
 	/*{ path: 'hero/:id',      component: HeroDetailComponent },
 	{
 		path: 'heroes',
@@ -57,21 +77,33 @@ const appRoutes: Routes = [
 			SongsComponent,
 			ContactComponent,
 			PageNotFoundComponent,
-			DictionaryPipe
+			LoginComponent,
+			DictionaryPipe,
+			AdminConcertComponent,
+			AdminBioComponent,
+			AdminBlogComponent,
+			AdminSongsComponent
 		],
 	imports: [
+		FormsModule,
 		RouterModule.forRoot(appRoutes),
 		BrowserModule,
+		BrowserAnimationsModule,
 		AngularFireModule.initializeApp(environment.firebase),
 		AngularFirestoreModule, // imports firebase/firestore, only needed for database features
 		AngularFireDatabaseModule, // imports firebase/firestore, only needed for database features
 		AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
 		AngularFireStorageModule, // imports firebase/storage only needed for storage features
 		CollapseModule.forRoot(),
-		BsDropdownModule.forRoot()
+		BsDropdownModule.forRoot(),
+		NgxGalleryModule,
+		OwlDateTimeModule, 
+		OwlNativeDateTimeModule,
 	],
 	providers: [
-		FireDatabaseService
+		FireDatabaseService,
+		AuthService,
+		AuthGuard
 	],
 	bootstrap: [AppComponent]
 })

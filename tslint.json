@@ -19,8 +19,7 @@
     ],
     "import-spacing": true,
     "indent": [
-      true,
-      "spaces"
+      false
     ],
     "interface-over-type-literal": true,
     "label-position": true,
@@ -79,7 +78,7 @@
       "check-else",
       "check-whitespace"
     ],
-    "prefer-const": true,
+    "prefer-const": false,
     "quotemark": [
       true,
       "single"

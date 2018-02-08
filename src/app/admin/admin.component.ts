@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../common/auth.service';
+import { Router } from '@angular/router';
+import { Dictionary } from '../common/dictionary';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.less']
 })
 export class AdminComponent implements OnInit {
+  routes = new Dictionary<string>();
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) {
+    this.routes['bio'] = 'Bemutatkozás';
+    this.routes['blog'] = 'Blog';
+    this.routes['songs'] = 'Dalok';
+    this.routes['concert'] = 'Koncertek';
+  }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
 }

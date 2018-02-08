@@ -1,0 +1,55 @@
+<div class="admin-page" *ngIf="newConcert">
+  <h1>Új / korábbi koncertek szerkesztése</h1>
+  <hr/>
+
+  <div class="form-group">
+    <label for="sel1">Koncert:</label>
+    <select class="form-control" [(ngModel)]="selectedConcertKey" placeholder="Válassz egy koncertet">
+      <option *ngFor="let concert of concerts | dictionary" value="{{concert.key}}">{{(concert.value.date | date) + ' - ' + concert.value.place}}</option>
+    </select>
+  </div>
+  <div class="form-group" *ngIf="selectedConcertKey">
+      <button class="btn btn-primary" (click)="loadConcert()">Szerkeszt</button>
+      <button class="btn btn-danger" (click)="deleteConcert()">Törlés</button>
+  </div>
+  
+  <hr/>
+
+  <div class="form-group">
+    <label for="comment">Dátum:</label>
+    <input (keydown)="dateKeyDown($event)" [(ngModel)]="newConcert.dateObj" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control">
+    <owl-date-time #dt1></owl-date-time>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Helyszín:</label>
+    <input class="form-control" name="place" [(ngModel)]="newConcert.place" required>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Belépő:</label>
+    <input class="form-control" name="entry" [(ngModel)]="newConcert.entry">
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="comment">FB Event:</label>
+    <div class="controls">
+      <div class="input-group">
+        <span class="input-group-addon">https://www.facebook.com/events/</span>
+        <input class="form-control" name="eventid" [(ngModel)]="newConcert.eventid">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="comment">Megjegyzés:</label>
+    <textarea class="form-control" name="comment" [(ngModel)]="newConcert.comment" rows=3></textarea>
+  </div>
+   
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="addConcert()">Mentés</button>
+    <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
+    <div type="alert alert-danger" close="closeAlert()" *ngIf="errorAlert">{{errorAlert}}</div>
+  </div>
+
+</div>

@@ -7,12 +7,4 @@ export class FireDatabaseService {
 	constructor(private db: AngularFireDatabase) {
 
 	}
-
-	getObject(name: string): Observable<any> {
-		return this.db.object(name).valueChanges();
-	}
-
-	getList(name: string): Observable<any[]> {
-		return this.db.list(name).valueChanges();
-	}
 }
