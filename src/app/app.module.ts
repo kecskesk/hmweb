@@ -29,6 +29,7 @@ import { FormsModule } from '@angular/forms';
 import { AdminBioComponent } from './admin/admin-bio/admin-bio.component';
 import { AdminBlogComponent } from './admin/admin-blog/admin-blog.component';
 import { AdminConcertComponent } from './admin/admin-concert/admin-concert.component';
+import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
 		{ path: 'blog', component: AdminBlogComponent },
 		{ path: 'concert', component: AdminConcertComponent },
 		{ path: 'songs', component: AdminSongsComponent },
+		{ path: 'home', component: AdminHomeComponent },
 	  ]},
 	/*{ path: 'hero/:id',      component: HeroDetailComponent },
 	{
@@ -82,7 +84,8 @@ const appRoutes: Routes = [
 			AdminConcertComponent,
 			AdminBioComponent,
 			AdminBlogComponent,
-			AdminSongsComponent
+			AdminSongsComponent,
+			AdminHomeComponent
 		],
 	imports: [
 		FormsModule,

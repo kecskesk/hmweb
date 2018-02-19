@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private storage: AngularFireStorage,
 			  private db: AngularFireDatabase) {
   	this.db.object('home-picture').valueChanges().subscribe((url) => {
-		const ref = this.storage.ref('home-picture/'+url);
+		const ref = this.storage.ref('home-picture/' + url);
 		ref.getDownloadURL().subscribe((imageUrl) => {
 			this.imageUrl = imageUrl;
 		});
