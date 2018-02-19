@@ -8,15 +8,35 @@ import {Dictionary} from '../common/dictionary';
   templateUrl: './songs.component.html',
   styleUrls: ['./songs.component.less']
 })
-export class SongsComponent implements OnInit {
-	albums: Dictionary<Dictionary<number>> = new Dictionary<Dictionary<number>>();
+export class SongsComponent {
+	albums: Array<Album>;
+  oneAtATime = true;
 		constructor(db: AngularFireDatabase) {
-		db.object('albums').valueChanges().subscribe((result) => {
-			this.albums = result as Dictionary<any>;
+		db.list('albums').valueChanges().subscribe((result) => {
+			this.albums = result as Array<Album>;
 		});
 	}
 
-  ngOnInit() {
+  readSongs(songs: Array<Song>) {
+		let objectArray = [];
+		songs.forEach(song => {
+			if (song && song.lyrics) {
+				objectArray.push(song);
+			}
+		});
+		return objectArray;
   }
 
+}
+
+export class Album {
+	cover?: string;
+	songs: Array<Song>;
+	title: string;
+	year: string;
+}
+
+export class Song {
+	title: string;
+	lyrics: string;
 }

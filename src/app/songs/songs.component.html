@@ -1,12 +1,15 @@
 <div>
-	<ul *ngFor="let album of albums | dictionary">
-		<li>
-			{{album.key}}
-			<ol>
-				<li *ngFor="let song of album.value | dictionary">
-					{{song.key}}
-				</li>
-			</ol>
-		</li>
-	</ul>
+	<div *ngFor="let album of albums">
+		<h1>{{album.title}}
+			<strong>{{album.year}}</strong>
+		</h1>
+		<img [src]="album.cover" [alt]="album.cover">
+
+
+		<accordion [closeOthers]="true">
+			<accordion-group *ngFor="let song of readSongs(album.songs)" [heading]="song.title">
+				<p class="lyrics">{{song.lyrics}}</p>
+			</accordion-group>
+		</accordion>
+	</div>
 </div>

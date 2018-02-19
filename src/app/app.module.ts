@@ -12,7 +12,7 @@ import { ConcertComponent } from './concert/concert.component';
 import { SongsComponent } from './songs/songs.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { CollapseModule, BsDropdownModule } from 'ngx-bootstrap';
+import { CollapseModule, BsDropdownModule, AccordionModule } from 'ngx-bootstrap';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -99,6 +99,7 @@ const appRoutes: Routes = [
 		AngularFireStorageModule, // imports firebase/storage only needed for storage features
 		CollapseModule.forRoot(),
 		BsDropdownModule.forRoot(),
+		AccordionModule.forRoot(),
 		NgxGalleryModule,
 		OwlDateTimeModule, 
 		OwlNativeDateTimeModule,
