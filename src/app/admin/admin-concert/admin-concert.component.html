@@ -16,23 +16,23 @@
   <hr/>
 
   <div class="form-group">
-    <label for="comment">Dátum:</label>
-    <input (keydown)="dateKeyDown($event)" [(ngModel)]="newConcert.dateObj" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control">
+    <label for="date">Dátum:</label>
+    <input (keydown)="dateKeyDown($event)" name="date" [(ngModel)]="newConcert.dateObj" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control">
     <owl-date-time #dt1></owl-date-time>
   </div>
 
   <div class="form-group">
-    <label for="comment">Helyszín:</label>
+    <label for="place">Helyszín:</label>
     <input class="form-control" name="place" [(ngModel)]="newConcert.place" required>
   </div>
 
   <div class="form-group">
-    <label for="comment">Belépő:</label>
+    <label for="entry">Belépő:</label>
     <input class="form-control" name="entry" [(ngModel)]="newConcert.entry">
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="comment">FB Event:</label>
+    <label class="control-label" for="eventid">FB Event:</label>
     <div class="controls">
       <div class="input-group">
         <span class="input-group-addon">https://www.facebook.com/events/</span>

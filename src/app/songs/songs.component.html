@@ -1,12 +1,13 @@
-<div>
-	<div *ngFor="let album of albums">
-		<h1>{{album.title}}
+<div class="songs-page">
+	<div *ngFor="let album of albums" class="row">
+
+		<h1 class="col-md-12">{{album.title}}
 			<strong>{{album.year}}</strong>
 		</h1>
-		<img [src]="album.cover" [alt]="album.cover">
-
-
-		<accordion [closeOthers]="true">
+		<div class="col-md-2">
+			<img [src]="album.cover" [alt]="album.cover" class="img-thumbnail">
+		</div>
+		<accordion [closeOthers]="true" class="col-md-10">
 			<accordion-group *ngFor="let song of readSongs(album.songs)" [heading]="song.title">
 				<p class="lyrics">{{song.lyrics}}</p>
 			</accordion-group>
