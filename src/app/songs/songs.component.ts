@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import {Dictionary} from '../common/dictionary';
+import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
   selector: 'app-songs',
@@ -11,9 +12,20 @@ import {Dictionary} from '../common/dictionary';
 export class SongsComponent {
 	albums: Array<Album>;
   oneAtATime = true;
-		constructor(db: AngularFireDatabase) {
+	ALBUM_URL = 'album-covers';
+	
+	constructor(private db: AngularFireDatabase,
+							private storage: AngularFireStorage) {
 		db.list('albums').valueChanges().subscribe((result) => {
 			this.albums = result as Array<Album>;
+			this.albums.forEach((album) => {
+        if (album.cover) {
+          const ref = this.storage.ref(this.ALBUM_URL + '/' + album.cover);
+          ref.getDownloadURL().subscribe((imageUrl) => {
+            album.coverUrl = imageUrl;
+          });
+        }
+      });
 		});
 	}
 
@@ -31,6 +43,7 @@ export class SongsComponent {
 
 export class Album {
 	cover?: string;
+	coverUrl?: string;
 	songs: Array<Song>;
 	title: string;
 	year: string;

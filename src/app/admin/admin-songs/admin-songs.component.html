@@ -2,6 +2,9 @@
     <h1>Új / korábbi albumok szerkesztése</h1>
     <hr/>
   
+    <div class="form-group" *ngIf="selectedAlbumIdx">
+      <button class="btn btn-success" (click)="clearAlbum()">Új album</button>
+    </div>
     <div class="form-group">
       <label for="sel1">Album:</label>
       <select class="form-control" [(ngModel)]="selectedAlbumIdx" placeholder="Válassz egy albumot">
@@ -10,7 +13,7 @@
     </div>
     <div class="form-group" *ngIf="selectedAlbumIdx">
         <button class="btn btn-primary" (click)="loadAlbum()">Szerkeszt</button>
-        <button class="btn btn-danger" (click)="deleteAlbum()">Törlés</button>
+        <button class="btn btn-danger" (click)="deleteAlbum()">Album törlése</button>
     </div>
     
     <hr/>

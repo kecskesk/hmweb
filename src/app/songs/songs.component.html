@@ -5,7 +5,7 @@
 			<strong>{{album.year}}</strong>
 		</h1>
 		<div class="col-md-2">
-			<img [src]="album.cover" [alt]="album.cover" class="img-thumbnail">
+			<img *ngIf="album.coverUrl" [src]="album.coverUrl" [alt]="album.cover" class="img-thumbnail">
 		</div>
 		<accordion [closeOthers]="true" class="col-md-10">
 			<accordion-group *ngFor="let song of readSongs(album.songs)" [heading]="song.title">

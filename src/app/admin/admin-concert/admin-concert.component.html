@@ -2,13 +2,16 @@
   <h1>Új / korábbi koncertek szerkesztése</h1>
   <hr/>
 
+  <div class="form-group" *ngIf="selectedConcertIdx">
+    <button class="btn btn-success" (click)="clearConcert()">Új koncert</button>
+  </div>
   <div class="form-group">
     <label for="sel1">Koncert:</label>
-    <select class="form-control" [(ngModel)]="selectedConcertKey" placeholder="Válassz egy koncertet">
-      <option *ngFor="let concert of concerts | dictionary" value="{{concert.key}}">{{(concert.value.date | date) + ' - ' + concert.value.place}}</option>
+    <select class="form-control" [(ngModel)]="selectedConcertIdx" placeholder="Válassz egy koncertet">
+      <option *ngFor="let concert of concerts; let i = index" value="{{i}}">{{(concert.date | date) + ' - ' + concert.place}}</option>
     </select>
   </div>
-  <div class="form-group" *ngIf="selectedConcertKey">
+  <div class="form-group" *ngIf="selectedConcertIdx">
       <button class="btn btn-primary" (click)="loadConcert()">Szerkeszt</button>
       <button class="btn btn-danger" (click)="deleteConcert()">Törlés</button>
   </div>
