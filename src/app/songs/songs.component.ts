@@ -31,11 +31,14 @@ export class SongsComponent {
 
   readSongs(songs: Array<Song>) {
 		let objectArray = [];
-		songs.forEach(song => {
-			if (song && song.lyrics) {
-				objectArray.push(song);
-			}
-		});
+		if (songs) {
+			Object.keys(songs).forEach(key => {
+				let song = songs[key];
+				if (song && song.lyrics) {
+					objectArray.push(song);
+				}
+			});
+		}
 		return objectArray;
   }
 
@@ -44,12 +47,15 @@ export class SongsComponent {
 export class Album {
 	cover?: string;
 	coverUrl?: string;
-	songs: Array<Song>;
+	songs: any;
+	songKeys: Array<string> = [];
+	songList: Array<Song> = [];
 	title: string;
 	year: string;
 }
 
 export class Song {
+	order?: number;
 	title: string;
 	lyrics: string;
 }

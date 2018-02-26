@@ -13,7 +13,7 @@
     </div>
     <div class="form-group" *ngIf="selectedAlbumIdx">
         <button class="btn btn-primary" (click)="loadAlbum()">Szerkeszt</button>
-        <button class="btn btn-danger" (click)="deleteAlbum()">Album törlése</button>
+        <button *ngIf="editedAlbumKey" class="btn btn-danger" (click)="deleteAlbum()">Album törlése</button>
     </div>
     
     <hr/>
@@ -32,9 +32,35 @@
       <label for="cover">Borítókép: <span *ngIf="newAlbum.cover">(régi kép: {{newAlbum.cover}})</span></label>
       <input class="form-control" type="file" name="cover" value="Tallózás" (change)="browseEvent($event)">
     </div>
-       
+
+    <div class="form-group" *ngIf="selectedSongIdx">
+      <button class="btn btn-success" (click)="clearSong()">Új dal</button>
+    </div>
+    <div *ngIf="editedAlbumKey">
     <div class="form-group">
-      <button class="btn btn-primary" (click)="addAlbum()">Mentés</button>
+      <label for="sel1">Dal:</label>
+      <select class="form-control" [(ngModel)]="selectedSongIdx" placeholder="Válassz egy dalt">
+        <option *ngFor="let song of newAlbum.songList; let i = index" value="{{i}}">{{i + ' - ' + song.title}}</option>
+      </select>
+    </div>
+    <div class="form-group" *ngIf="selectedSongIdx">
+        <button class="btn btn-primary" (click)="loadSong()">Szerkeszt</button>
+        <button *ngIf="editedSongKey" class="btn btn-danger" (click)="deleteSong()">Dal törlése</button>
+    </div>
+  
+    <div class="form-group">
+      <label for="stitle">Cím:</label>
+      <input class="form-control" name="stitle" [(ngModel)]="newSong.title" required>
+    </div>
+  
+    <div class="form-group">
+      <label for="lyrics">Tartalom:</label>
+      <textarea class="form-control" id='lyrics' name="lyrics" [(ngModel)]="newSong.lyrics" (input)="setHeight()" required></textarea>
+    </div>
+  </div>
+    
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="saveAlbum()">Mentés</button>
       <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
       <div type="alert alert-danger" close="closeAlert()" *ngIf="errorAlert">{{errorAlert}}</div>
     </div>  

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
-import { Album } from '../../songs/songs.component';
+import { Album, Song } from '../../songs/songs.component';
 import { Dictionary } from '../../common/dictionary';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -17,9 +17,11 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
   selectedAlbumIdx: number;
   selectedSongIdx: number;
   newAlbum = new Album();
+  newSong = new Song();
   albums: Array<Album> = [];
   snaps: Array<SnapshotAction>;
-  editedKey: string;
+  editedAlbumKey: string;
+  editedSongKey: string;
   newCoverFile: File;
   ALBUM_URL = 'album-covers';
   oldPic: string;
@@ -38,12 +40,32 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
   ngOnInit() {
   }
 
+  clearSong() {
+    this.newSong = new Song();
+    this.selectedSongIdx = undefined;
+    this.editedSongKey = undefined;
+    if (document.getElementById('lyrics')) {
+      document.getElementById('lyrics').style.height = '30px';
+    }
+  }
+
+
   loadAlbum() {
     this.newAlbum = this.albums[this.selectedAlbumIdx];
-    this.editedKey = this.snaps[this.selectedAlbumIdx].key;
+    this.editedAlbumKey = this.snaps[this.selectedAlbumIdx].key;
     if (this.newAlbum.cover) {
       this.oldPic = this.newAlbum.cover;
     }
+    if (this.newAlbum.songs) {
+      this.newAlbum.songKeys = Object.keys(this.newAlbum.songs);
+      this.newAlbum.songList = this.newAlbum.songKeys.map(key => this.newAlbum.songs[key]);
+      this.clearSong();
+    }
+  }
+
+  loadSong() {
+    this.newSong = this.newAlbum.songList[this.selectedSongIdx];
+    this.editedSongKey = this.newAlbum.songKeys[this.selectedAlbumIdx];
   }
 
   dateKeyDown($event: Event) {
@@ -52,17 +74,34 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
   }
 
   deleteAlbum() {
-    if (this.selectedAlbumIdx) {
-      this.newAlbum = new Album();
-      // this.db.list('albums').remove(this.selectedAlbumIdx);
+    if (this.editedAlbumKey) {
+      this.db.list('albums').remove(this.editedAlbumKey);
+      this.clearAlbum();
     }
   }
 
-  addAlbum() {
-    if (this.newAlbum && !this.editedKey) {
+  deleteSong() {
+    if (this.editedSongKey && this.editedAlbumKey) {
+      this.db.list('albums/' + this.editedAlbumKey + '/songs').remove(this.editedSongKey);
+      this.loadAlbum();
+    }
+  }
+
+  saveAlbum() {
+    if (this.newAlbum && this.newSong && this.newSong.title && !this.editedSongKey) {
+      if (!this.newAlbum.songs) {
+        this.newAlbum.songs = [];
+      }
+      this.newAlbum.songs.push(this.newSong);
+    } 
+    
+    if (this.newAlbum && !this.editedAlbumKey) {
       this.db.list('albums').push(this.newAlbum).then(() => this.addAlbumThen());
     } else {
-      this.db.list('albums').set(this.editedKey, this.newAlbum).then(() => this.addAlbumThen());
+      this.db.list('albums').set(this.editedAlbumKey, this.newAlbum).then(() => this.addAlbumThen());
+    }
+    if (this.editedAlbumKey) {
+      this.loadAlbum();
     }
   }
 
@@ -102,6 +141,8 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
   clearAlbum() {
     this.selectedAlbumIdx = undefined;
     this.newAlbum = new Album();
+    this.editedAlbumKey = undefined;
+    this.clearSong();
   }
 
   addAlbumThen() {
@@ -112,6 +153,13 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
       Observable.timer(2000).subscribe(() => {
         this.savedAlert = false;
       });
+    }
+  }
+
+  setHeight(): void {
+    if (document.getElementById('lyrics')) {
+      document.getElementById('lyrics').style.height = 
+      document.getElementById('lyrics').scrollHeight + 'px';
     }
   }
 }
