@@ -7,7 +7,8 @@
   </div>
   <div class="form-group">
     <label for="sel1">Koncert:</label>
-    <select class="form-control" [(ngModel)]="selectedConcertIdx" placeholder="Válassz egy koncertet">
+    <select class="form-control" [(ngModel)]="selectedConcertIdx">
+      <option [ngValue]="undefined">--- Új koncert ---</option>
       <option *ngFor="let concert of concerts; let i = index" value="{{i}}">{{(concert.date | date) + ' - ' + concert.place}}</option>
     </select>
   </div>
