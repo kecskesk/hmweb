@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-blog',
@@ -6,12 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./blog.component.less']
 })
 export class BlogComponent implements OnInit {
+  modalRef: BsModalRef;
+	blogposts: Array<Blogpost> = new Array<Blogpost>();
+	modalPost: Blogpost;
 
-  constructor() { }
+  constructor(db: AngularFireDatabase,
+              private modalService: BsModalService) {
+		db.list('blogposts').valueChanges().subscribe((result) => {
+			this.blogposts = result as Array<Blogpost>;
+		});
+	}
 
   ngOnInit() {
   }
 
+  openModal(post: Blogpost, template: TemplateRef<any>) {
+    this.modalPost = post;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  closeModal() {
+    this.modalPost = undefined;
+  }
 }
 
 export class Blogpost {
