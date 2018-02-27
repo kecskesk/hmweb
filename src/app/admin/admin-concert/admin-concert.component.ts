@@ -33,8 +33,6 @@ export class AdminConcertComponent extends AdminChildBaseComponent implements On
     this.newConcert = this.concerts[this.selectedConcertIdx];
     this.newConcert.dateObj = new Date();
     this.newConcert.dateObj.setTime(this.newConcert.date);
-    console.log(this.newConcert.date);
-    console.log(this.newConcert.dateObj);
   }
 
   dateKeyDown($event: Event) {

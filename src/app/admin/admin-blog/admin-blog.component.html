@@ -1,3 +1,53 @@
-<p>
-  admin-blog works!
-</p>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Dátum</th>
+    <th>Cím</th>
+    <th>Szöveg</th>
+    <th>Akció</th>
+  </tr>
+  <tr *ngFor="let post of blogposts;let i = index;">
+    <td style="width: 15%;">{{post.date | date:'y MMM d, H:mm'}}</td>
+    <td style="width: 20%;"><p class="text-field">{{post.title}}</p></td>
+    <td style="width: 25%;"><p class="text-field">{{post.text}}</p></td>
+    <td style="width: 15%;">
+      <button class="btn fa fa-check" (click)="editPost(i)"> Edit</button>
+      <button class="btn btn-danger fa fa-trash" (click)="deletePost(i)"> Delete</button>
+    </td>
+  </tr>
+</table>
+
+<div>
+  <div class="form-group">
+    <button class="btn btn-success" (click)="newPost()">Új poszt</button>
+  </div>
+</div>
+
+<div *ngIf="editedPost">
+  <h2 *ngIf="editedKey">Szerkesztett poszt: {{editedPost.title}}</h2>
+  <h2 *ngIf="!editedKey">Új poszt: {{editedPost.title}}</h2>
+</div>
+
+
+<div *ngIf="editedPost">
+    <div class="form-group">
+      <label for="title">Cím:</label>
+      <input class="form-control" name="title" [(ngModel)]="editedPost.title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Dátum:</label>
+      <input (keydown)="dateKeyDown($event)" name="date" [(ngModel)]="editedPost.dateObj" [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" class="form-control">
+      <owl-date-time #dt1></owl-date-time>
+    </div>
+
+    <div class="form-group">
+      <label for="text">Szöveg:</label>
+      <textarea class="form-control" id='text' name="text" [(ngModel)]="editedPost.text" (input)="setHeight()" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="savePost()">Mentés</button>
+      <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
+      <div type="alert alert-danger" close="closeAlert()" *ngIf="errorAlert">{{errorAlert}}</div>
+    </div>    
+</div>

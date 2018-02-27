@@ -13,3 +13,10 @@ export class BlogComponent implements OnInit {
   }
 
 }
+
+export class Blogpost {
+  title: string;
+  date: any;
+  dateObj: Date;
+  text: string;
+}
