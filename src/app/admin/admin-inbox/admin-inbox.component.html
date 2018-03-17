@@ -1,12 +1,16 @@
 <table class="table table-bordered table-striped">
   <tr>
     <th>Dátum</th>
+    <th>Feladó</th>
+    <th>Elérhetőség</th>
     <th>Cím</th>
     <th>Szöveg</th>
     <th>Akció</th>
   </tr>
   <tr *ngFor="let mail of mail;let i = index;">
     <td style="width: 15%;">{{mail.date | date:'y MMM d, H:mm'}}</td>
+    <td style="width: 20%;"><p class="text-field">{{mail.from}}</p></td>
+    <td style="width: 20%;"><p class="text-field">{{mail.replyto}}</p></td>
     <td style="width: 20%;"><p class="text-field">{{mail.title}}</p></td>
     <td style="width: 25%;"><p class="text-field">{{mail.text}}</p></td>
     <td style="width: 15%;">
@@ -23,8 +27,18 @@
 
 <div *ngIf="editedMail">
     <div class="form-group">
+      <label for="from">Feladó:</label>
+      <div class="form-control" name="from">{{editedMail.from}}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="replyto">Elérhetőség:</label>
+      <div class="form-control" name="replyto">{{editedMail.replyto}}</div>
+    </div>
+    
+    <div class="form-group">
       <label for="title">Cím:</label>
-      <input disabled class="form-control" name="title" [(ngModel)]="editedMail.title" required>
+      <div class="form-control" name="title">{{editedMail.title}}</div>
     </div>
 
     <div class="form-group">

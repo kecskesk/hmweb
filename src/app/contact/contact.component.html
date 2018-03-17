@@ -6,6 +6,11 @@
     <label for="from">Feladó:</label>
     <input class="form-control" name="from" [(ngModel)]="newMail.from" required>
   </div>
+  
+  <div class="form-group">
+    <label for="replyto">Válaszcím (email/telefon):</label>
+    <input class="form-control" name="replyto" [(ngModel)]="newMail.replyto" required>
+  </div>
 
   <div class="form-group">
     <label for="title">Téma:</label>

@@ -50,6 +50,7 @@ export class ContactComponent {
 export class ContactMail {
   text: string;
   from: string;
+  replyto: string;
   title: string;
   date: number = new Date().getTime();
 }
