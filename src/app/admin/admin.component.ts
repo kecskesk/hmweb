@@ -12,6 +12,7 @@ export class AdminComponent implements OnInit {
   routes = new Dictionary<string>();
 
   constructor(private authService: AuthService, private router: Router) {
+    this.routes['inbox'] = 'Levelek';
     this.routes['home'] = 'Kezdőlap';
     this.routes['bio'] = 'Bemutatkozás';
     this.routes['blog'] = 'Blog';

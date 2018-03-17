@@ -1,6 +1,36 @@
 {
   "rules": {
-    ".read": "true",
-    ".write": "auth != null"
+    "inbox": {
+    	".write": "true",
+    	".read": "auth != null"  
+    },
+    "albums": {
+      ".read": "true",
+    	".write": "auth != null"
+  	},
+    "album-covers": {
+      ".read": "true",
+    	".write": "auth != null"
+  	},
+    "bio": {
+      ".read": "true",
+    	".write": "auth != null"
+  	},
+    "blogposts": {
+      ".read": "true",
+    	".write": "auth != null"
+  	},
+    "concerts": {
+      ".read": "true",
+    	".write": "auth != null"
+  	},
+    "gallery": {
+      ".read": "true",
+    	".write": "auth != null"
+  	},
+    "home-picture": {
+      ".read": "true",
+    	".write": "auth != null"
+  	}
   }
 }

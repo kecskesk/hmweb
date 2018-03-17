@@ -1,0 +1,39 @@
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Dátum</th>
+    <th>Cím</th>
+    <th>Szöveg</th>
+    <th>Akció</th>
+  </tr>
+  <tr *ngFor="let mail of mail;let i = index;">
+    <td style="width: 15%;">{{mail.date | date:'y MMM d, H:mm'}}</td>
+    <td style="width: 20%;"><p class="text-field">{{mail.title}}</p></td>
+    <td style="width: 25%;"><p class="text-field">{{mail.text}}</p></td>
+    <td style="width: 15%;">
+      <button class="btn fa fa-check" (click)="editMail(i)"> Open</button>
+      <button class="btn btn-danger fa fa-trash" (click)="deleteMail(i)"> Delete</button>
+    </td>
+  </tr>
+</table>
+
+<div *ngIf="editedMail">
+  <h2>Nyitott levél: {{editedMail.title}}</h2>
+</div>
+
+
+<div *ngIf="editedMail">
+    <div class="form-group">
+      <label for="title">Cím:</label>
+      <input disabled class="form-control" name="title" [(ngModel)]="editedMail.title" required>
+    </div>
+
+    <div class="form-group">
+      <label for="date">Dátum:</label>
+      <div class="form-control">{{editedMail.date | date:'y MMM d, H:mm'}}</div>
+    </div>
+
+    <div class="form-group">
+      <label for="text">Szöveg:</label>
+      <textarea disabled class="form-control" id='text' name="text" [(ngModel)]="editedMail.text" (input)="setHeight()" required></textarea>
+    </div>  
+</div>

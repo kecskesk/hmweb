@@ -1,3 +1,26 @@
-<p>
-  kapcsolat works!
-</p>
+<div class="page">
+  <h1>Kapcsolat: új üzenet küldése</h1>
+  <hr/>
+  
+  <div class="form-group">
+    <label for="from">Feladó:</label>
+    <input class="form-control" name="from" [(ngModel)]="newMail.from" required>
+  </div>
+
+  <div class="form-group">
+    <label for="title">Téma:</label>
+    <input class="form-control" name="title" [(ngModel)]="newMail.title" required>
+  </div>
+
+  <div class="form-group">
+    <label for="text">Tartalom:</label>
+    <textarea class="form-control" id='text' name="text" [(ngModel)]="newMail.text" (input)="setHeight()" required></textarea>
+  </div>
+   
+  <div class="form-group">
+    <button class="btn btn-primary" (click)="sendMail()">Mentés</button>
+    <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
+    <div class="alert alert-danger" close="closeAlert()" *ngIf="errorAlert">{{errorAlert}}</div>
+  </div>
+
+</div>

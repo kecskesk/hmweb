@@ -33,6 +33,7 @@ import { AdminHomeComponent } from './admin/admin-home/admin-home.component';
 import { AdminSongsComponent } from './admin/admin-songs/admin-songs.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { AdminInboxComponent } from './admin/admin-inbox/admin-inbox.component';
 
 
 const appRoutes: Routes = [
@@ -46,12 +47,13 @@ const appRoutes: Routes = [
 	{ path: 'login', component: LoginComponent },
 	{ path: 'admin', component: AdminComponent, canActivate: [AuthGuard],
 		children: [
-		{ path: '', redirectTo: 'bio', pathMatch: 'full' },
+		{ path: '', redirectTo: 'inbox', pathMatch: 'full' },
 		{ path: 'bio', component: AdminBioComponent },
 		{ path: 'blog', component: AdminBlogComponent },
 		{ path: 'concert', component: AdminConcertComponent },
 		{ path: 'songs', component: AdminSongsComponent },
 		{ path: 'home', component: AdminHomeComponent },
+		{ path: 'inbox', component: AdminInboxComponent },
 	  ]},
 	/*{ path: 'hero/:id',      component: HeroDetailComponent },
 	{
@@ -85,7 +87,8 @@ const appRoutes: Routes = [
 			AdminBioComponent,
 			AdminBlogComponent,
 			AdminSongsComponent,
-			AdminHomeComponent
+			AdminHomeComponent,
+			AdminInboxComponent,
 		],
 	imports: [
 		FormsModule,
