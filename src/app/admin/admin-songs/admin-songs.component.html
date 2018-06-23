@@ -1,7 +1,7 @@
 <div class="admin-page" *ngIf="newAlbum">
     <h1>Új / korábbi albumok szerkesztése</h1>
     <hr/>
-  
+
     <div class="form-group" *ngIf="selectedAlbumIdx">
       <button class="btn btn-success" (click)="clearAlbum()">Új album</button>
     </div>
@@ -9,26 +9,26 @@
       <label for="sel1">Album:</label>
       <select class="form-control" [(ngModel)]="selectedAlbumIdx">
         <option [ngValue]="undefined">--- Új album ---</option>
-        <option *ngFor="let album of albums; let i = index" value="{{i}}">{{(album.title) + ' - ' + album.year}}</option>
+        <option *ngFor="let album of albums; let i = index" value="{{i + 1}}">{{(album.title) + ' - ' + album.year}}</option>
       </select>
     </div>
     <div class="form-group" *ngIf="selectedAlbumIdx">
         <button class="btn btn-primary" (click)="loadAlbum()">Szerkeszt</button>
         <button *ngIf="editedAlbumKey" class="btn btn-danger" (click)="deleteAlbum()">Album törlése</button>
     </div>
-    
+
     <hr/>
-  
+
     <div class="form-group">
       <label for="title">Cím:</label>
       <input class="form-control" name="title" [(ngModel)]="newAlbum.title" required>
     </div>
-  
+
     <div class="form-group">
       <label for="year">Megjelenés éve:</label>
       <input class="form-control" type="text" pattern="\d*" maxlength="4" name="year" [(ngModel)]="newAlbum.year" required>
     </div>
-    
+
     <div class="form-group">
       <label for="cover">Borítókép: <span *ngIf="newAlbum.cover">(régi kép: {{newAlbum.cover}})</span></label>
       <input class="form-control" type="file" name="cover" value="Tallózás" (change)="browseEvent($event)">
@@ -42,28 +42,28 @@
       <label for="sel1">Dal:</label>
       <select class="form-control" [(ngModel)]="selectedSongIdx">
         <option [ngValue]="undefined">--- Új dal ---</option>
-        <option *ngFor="let song of newAlbum.songList; let i = index" value="{{i}}">{{i + ' - ' + song.title}}</option>
+        <option *ngFor="let song of newAlbum.songList; let i = index" value="{{i + 1}}">{{i + ' - ' + song.title}}</option>
       </select>
     </div>
     <div class="form-group" *ngIf="selectedSongIdx">
         <button class="btn btn-primary" (click)="loadSong()">Szerkeszt</button>
         <button *ngIf="editedSongKey" class="btn btn-danger" (click)="deleteSong()">Dal törlése</button>
     </div>
-  
+
     <div class="form-group">
       <label for="stitle">Cím:</label>
       <input class="form-control" name="stitle" [(ngModel)]="newSong.title" required>
     </div>
-  
+
     <div class="form-group">
       <label for="lyrics">Tartalom:</label>
       <textarea class="form-control" id='lyrics' name="lyrics" [(ngModel)]="newSong.lyrics" (input)="setHeight()" required></textarea>
     </div>
   </div>
-    
+
     <div class="form-group">
       <button class="btn btn-primary" (click)="saveAlbum()">Mentés</button>
       <div class="alert alert-success" close="closeAlert()" *ngIf="savedAlert">Mentve.</div>
       <div class="alert alert-danger" close="closeAlert()" *ngIf="errorAlert">{{errorAlert}}</div>
-    </div>  
+    </div>
   </div>

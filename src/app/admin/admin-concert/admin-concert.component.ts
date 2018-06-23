@@ -3,7 +3,6 @@ import { AngularFireDatabase, SnapshotAction } from 'angularfire2/database';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
 import { Concert } from '../../concert/concert';
 import { interval } from 'rxjs';
-import { Dictionary } from '../../common/dictionary';
 
 @Component({
   selector: 'app-admin-concert',
@@ -11,9 +10,9 @@ import { Dictionary } from '../../common/dictionary';
   styleUrls: ['./admin-concert.component.less']
 })
 export class AdminConcertComponent extends AdminChildBaseComponent implements OnInit {
-  selectedConcertIdx: string;
+  selectedConcertIdx: number;
   newConcert = new Concert();
-  snaps: Array<SnapshotAction>;
+  snaps: Array<SnapshotAction<Concert>>;
 	concerts: Array<Concert> = [];
 
 	constructor(private db: AngularFireDatabase) {
@@ -22,7 +21,7 @@ export class AdminConcertComponent extends AdminChildBaseComponent implements On
 			this.concerts = result as Array<Concert>;
 		});
 		db.list('concerts').snapshotChanges().subscribe((result) => {
-      this.snaps = result;
+      this.snaps = result as Array<SnapshotAction<Concert>>;
     });
   }
 
@@ -30,7 +29,7 @@ export class AdminConcertComponent extends AdminChildBaseComponent implements On
   }
 
   loadConcert() {
-    this.newConcert = this.concerts[this.selectedConcertIdx];
+    this.newConcert = this.concerts[this.selectedConcertIdx - 1];
     this.newConcert.dateObj = new Date();
     this.newConcert.dateObj.setTime(this.newConcert.date);
   }
@@ -49,14 +48,14 @@ export class AdminConcertComponent extends AdminChildBaseComponent implements On
   deleteConcert() {
     if (this.selectedConcertIdx) {
       this.newConcert = new Concert();
-      this.db.list('concerts').remove(this.snaps[this.selectedConcertIdx].key);
+      this.db.list('concerts').remove(this.snaps[this.selectedConcertIdx - 1].key);
     }
   }
 
   addConcert() {
     if (this.newConcert) {
       if (this.selectedConcertIdx) {
-        this.db.list('concerts').remove(this.snaps[this.selectedConcertIdx].key);
+        this.db.list('concerts').remove(this.snaps[this.selectedConcertIdx - 1].key);
       }
       this.newConcert.date = this.newConcert.dateObj.getTime().toString();
       this.db.list('concerts').set(this.newConcert.date, this.newConcert).then(() => {

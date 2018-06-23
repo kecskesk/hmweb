@@ -18,7 +18,7 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
   newAlbum = new Album();
   newSong = new Song();
   albums: Array<Album> = [];
-  snaps: Array<SnapshotAction>;
+  snaps: Array<SnapshotAction<Album>>;
   editedAlbumKey: string;
   editedSongKey: string;
   newCoverFile: File;
@@ -32,7 +32,7 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
       this.albums = result as Array<Album>;
     });
 		db.list('albums').snapshotChanges().subscribe((result) => {
-      this.snaps = result;
+      this.snaps = result as Array<SnapshotAction<Album>>;
     });
   }
 
@@ -50,8 +50,8 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
 
 
   loadAlbum() {
-    this.newAlbum = this.albums[this.selectedAlbumIdx];
-    this.editedAlbumKey = this.snaps[this.selectedAlbumIdx].key;
+    this.newAlbum = this.albums[this.selectedAlbumIdx - 1];
+    this.editedAlbumKey = this.snaps[this.selectedAlbumIdx - 1].key;
     if (this.newAlbum.cover) {
       this.oldPic = this.newAlbum.cover;
     }
@@ -63,8 +63,8 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
   }
 
   loadSong() {
-    this.newSong = this.newAlbum.songList[this.selectedSongIdx];
-    this.editedSongKey = this.newAlbum.songKeys[this.selectedAlbumIdx];
+    this.newSong = this.newAlbum.songList[this.selectedSongIdx - 1];
+    this.editedSongKey = this.newAlbum.songKeys[this.selectedAlbumIdx - 1];
   }
 
   dateKeyDown($event: Event) {

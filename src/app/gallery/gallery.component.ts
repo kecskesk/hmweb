@@ -10,7 +10,7 @@ import { AngularFireStorage } from 'angularfire2/storage';
 })
 export class GalleryComponent implements OnInit {
     imageAlbums: Array<ImageAlbum> = [];
-    imageAlbumKeys: Array<SnapshotAction> = [];
+    imageAlbumKeys: Array<SnapshotAction<ImageAlbum>> = [];
     openAlbum: ImageAlbum;
     openAlbumKey: string;
 
@@ -19,7 +19,7 @@ export class GalleryComponent implements OnInit {
             this.imageAlbums = res as Array<ImageAlbum>;
         });
         this.db.list('gallery').snapshotChanges().subscribe((res) => {
-            this.imageAlbumKeys = res as Array<SnapshotAction>;
+            this.imageAlbumKeys = res as Array<SnapshotAction<ImageAlbum>>;
         });
     }
     galleryOptions: NgxGalleryOptions[];
@@ -65,7 +65,7 @@ export class GalleryComponent implements OnInit {
                 this.galleryImages = [];
                 this.storage.ref('gallery/' + url).getDownloadURL().subscribe((fullUrl) => {
                     this.galleryImages.push({
-                        small: fullUrl, 
+                        small: fullUrl,
                         medium: fullUrl,
                         big: fullUrl
                     });
