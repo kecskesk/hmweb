@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireStorage } from 'angularfire2/storage';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-admin-home',
@@ -41,18 +41,18 @@ export class AdminHomeComponent extends AdminChildBaseComponent  implements OnIn
         });
       }
       this.db.object(this.PICTURE_URL).set(this.file.name).then(() => {
-        this.storage.upload(this.PICTURE_URL + '/'  + this.file.name, this.file).then(() => {   
+        this.storage.upload(this.PICTURE_URL + '/'  + this.file.name, this.file).then().then(() => {
           this.savedAlert = true;
-          Observable.timer(2000).subscribe(() => {
+          interval(2000).subscribe(() => {
             this.savedAlert = false;
           });
         }).catch((error) => {
           this.errorAlert = error;
-          Observable.timer(2000).subscribe(() => {
+          interval(2000).subscribe(() => {
             this.errorAlert = null;
           });
         });
-      });      
+      });
     }
   }
 }

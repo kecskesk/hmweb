@@ -1,5 +1,4 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {compareArrays} from 'ngx-bootstrap/chronos/utils/compare-arrays';
 
 @Pipe({name: 'dictionary', pure: false})
 export class DictionaryPipe implements PipeTransform {

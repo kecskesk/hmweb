@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
 import { Album, Song } from '../../songs/songs.component';
-import { Dictionary } from '../../common/dictionary';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 import { AngularFireStorage } from 'angularfire2/storage';
 import { SnapshotAction } from 'angularfire2/database/interfaces';
 
@@ -93,8 +92,8 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
         this.newAlbum.songs = [];
       }
       this.newAlbum.songs.push(this.newSong);
-    } 
-    
+    }
+
     if (this.newAlbum && !this.editedAlbumKey) {
       this.db.list('albums').push(this.newAlbum).then(() => this.addAlbumThen());
     } else {
@@ -122,19 +121,19 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
         });
       }
       this.db.object(this.ALBUM_URL).set(this.newCoverFile.name).then(() => {
-        this.storage.upload(this.ALBUM_URL + '/'  + this.newCoverFile.name, this.newCoverFile).then(() => {   
+        this.storage.upload(this.ALBUM_URL + '/'  + this.newCoverFile.name, this.newCoverFile).then().then(() => {
           this.oldPic = this.newCoverFile.name;
           this.savedAlert = true;
-          Observable.timer(2000).subscribe(() => {
+          interval(2000).subscribe(() => {
             this.savedAlert = false;
           });
         }).catch((error) => {
           this.errorAlert = error;
-          Observable.timer(2000).subscribe(() => {
+          interval(2000).subscribe(() => {
             this.errorAlert = null;
           });
         });
-      });      
+      });
     }
   }
 
@@ -150,7 +149,7 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
       this.upload();
     } else {
       this.savedAlert = true;
-      Observable.timer(2000).subscribe(() => {
+      interval(2000).subscribe(() => {
         this.savedAlert = false;
       });
     }
@@ -158,7 +157,7 @@ export class AdminSongsComponent extends AdminChildBaseComponent implements OnIn
 
   setHeight(): void {
     if (document.getElementById('lyrics')) {
-      document.getElementById('lyrics').style.height = 
+      document.getElementById('lyrics').style.height =
       document.getElementById('lyrics').scrollHeight + 'px';
     }
   }

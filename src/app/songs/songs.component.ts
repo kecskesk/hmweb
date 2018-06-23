@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-
-import {Dictionary} from '../common/dictionary';
 import { AngularFireStorage } from 'angularfire2/storage';
 
 @Component({
@@ -13,7 +11,7 @@ export class SongsComponent {
 	albums: Array<Album>;
   oneAtATime = true;
 	ALBUM_URL = 'album-covers';
-	
+
 	constructor(private db: AngularFireDatabase,
 							private storage: AngularFireStorage) {
 		db.list('albums').valueChanges().subscribe((result) => {

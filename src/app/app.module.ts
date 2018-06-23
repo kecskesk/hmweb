@@ -19,7 +19,6 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
-import { FireDatabaseService } from './common/fire-database.service';
 import { DictionaryPipe } from './common/dictionary.pipe';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { AuthService } from './common/auth.service';
@@ -105,11 +104,10 @@ const appRoutes: Routes = [
 		AccordionModule.forRoot(),
 		ModalModule.forRoot(),
 		NgxGalleryModule,
-		OwlDateTimeModule, 
+		OwlDateTimeModule,
 		OwlNativeDateTimeModule,
 	],
 	providers: [
-		FireDatabaseService,
 		AuthService,
 		AuthGuard
 	],

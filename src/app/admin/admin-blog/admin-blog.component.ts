@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
 import { Blogpost } from '../../blog/blog.component';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-admin-blog',
@@ -47,7 +47,7 @@ export class AdminBlogComponent extends AdminChildBaseComponent implements OnIni
       this.editedPost.dateObj.setTime(this.editedPost.date);
     }
     this.editedKey = this.blogpostKeys[index];
-    Observable.timer(100).subscribe(() => this.setHeight());
+    interval(100).subscribe(() => this.setHeight());
   }
 
   deletePost(index: number) {
@@ -60,7 +60,7 @@ export class AdminBlogComponent extends AdminChildBaseComponent implements OnIni
 
   setHeight(height?: number): void {
     if (document.getElementById('text')) {
-      document.getElementById('text').style.height = (height ? height.toString() : 
+      document.getElementById('text').style.height = (height ? height.toString() :
         document.getElementById('text').scrollHeight) + 'px';
     }
   }
@@ -80,7 +80,7 @@ export class AdminBlogComponent extends AdminChildBaseComponent implements OnIni
 
   saveThen() {
     this.savedAlert = true;
-    Observable.timer(2000).subscribe(() => {
+    interval(2000).subscribe(() => {
       this.savedAlert = false;
     });
     this.newPost();

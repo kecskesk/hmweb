@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-admin-bio',
@@ -19,7 +19,7 @@ export class AdminBioComponent extends AdminChildBaseComponent implements OnInit
   ngOnInit() {
     this.db.object('bio').valueChanges().subscribe((result) => {
       this.bio = result as string;
-      Observable.timer(200).subscribe(() => {
+      interval(200).subscribe(() => {
         this.setHeight();
       });
     });
@@ -29,12 +29,12 @@ export class AdminBioComponent extends AdminChildBaseComponent implements OnInit
     if (this.bio) {
       this.db.object('bio').set(this.bio).then(() => {
         this.savedAlert = true;
-        Observable.timer(2000).subscribe(() => {
+        interval(2000).subscribe(() => {
           this.savedAlert = false;
         });
       }).catch((error) => {
         this.errorAlert = error;
-        Observable.timer(2000).subscribe(() => {
+        interval(2000).subscribe(() => {
           this.errorAlert = null;
         });
       });
@@ -43,7 +43,7 @@ export class AdminBioComponent extends AdminChildBaseComponent implements OnInit
 
   setHeight(): void {
     if (document.getElementById('bio')) {
-      document.getElementById('bio').style.height = 
+      document.getElementById('bio').style.height =
       document.getElementById('bio').scrollHeight + 'px';
     }
   }

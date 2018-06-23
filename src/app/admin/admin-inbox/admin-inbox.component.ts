@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 import { ContactMail } from '../../contact/contact.component';
 
 @Component({
@@ -27,7 +27,7 @@ export class AdminInboxComponent extends AdminChildBaseComponent {
   editMail(index: number) {
     this.editedMail = this.mail[index];
     this.editedKey = this.mailKeys[index];
-    Observable.timer(100).subscribe(() => this.setHeight());
+    interval(100).subscribe(() => this.setHeight());
   }
 
   deleteMail(index: number) {
@@ -40,7 +40,7 @@ export class AdminInboxComponent extends AdminChildBaseComponent {
 
   setHeight(height?: number): void {
     if (document.getElementById('text')) {
-      document.getElementById('text').style.height = (height ? height.toString() : 
+      document.getElementById('text').style.height = (height ? height.toString() :
         document.getElementById('text').scrollHeight) + 'px';
     }
   }

@@ -1,6 +1,6 @@
   <div class="blog-container">
     <div class="row">
-      <div *ngFor="let post of blogposts; let i = index;" class="col-sm-6 row">
+      <div *ngFor="let post of blogPosts; let i = index;" class="col-sm-6 row">
         <div class="col-sm-1"></div>
         <div class="col-sm-10 thumbnail blog-bubble" (click)="openModal(post, template)">
           <h2>{{post.title}}</h2>

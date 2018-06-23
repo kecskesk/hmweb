@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase, SnapshotAction } from 'angularfire2/database';
 import { AdminChildBaseComponent } from '../admin-child-base.component';
 import { Concert } from '../../concert/concert';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 import { Dictionary } from '../../common/dictionary';
 
 @Component({
@@ -61,12 +61,12 @@ export class AdminConcertComponent extends AdminChildBaseComponent implements On
       this.newConcert.date = this.newConcert.dateObj.getTime().toString();
       this.db.list('concerts').set(this.newConcert.date, this.newConcert).then(() => {
         this.savedAlert = true;
-        Observable.timer(2000).subscribe(() => {
+        interval(2000).subscribe(() => {
           this.savedAlert = false;
         });
       }).catch((error) => {
         this.errorAlert = error;
-        Observable.timer(2000).subscribe(() => {
+        interval(2000).subscribe(() => {
           this.errorAlert = null;
         });
       });

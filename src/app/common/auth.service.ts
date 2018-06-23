@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from 'angularfire2/auth';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,8 @@ export class AuthService {
   }
 
   get isLoggedIn(): Observable<boolean> {
-    return this.fireAuth.authState.map(user => Boolean(user));
+    return this.fireAuth.authState.pipe(
+      map(user => Boolean(user))
+    );
   }
 }

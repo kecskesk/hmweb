@@ -9,13 +9,13 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 })
 export class BlogComponent implements OnInit {
   modalRef: BsModalRef;
-	blogposts: Array<Blogpost> = new Array<Blogpost>();
+	blogPosts: Array<Blogpost> = [];
 	modalPost: Blogpost;
 
   constructor(db: AngularFireDatabase,
               private modalService: BsModalService) {
-		db.list('blogposts').valueChanges().subscribe((result) => {
-			this.blogposts = result as Array<Blogpost>;
+		db.list('blogPosts').valueChanges().subscribe((result) => {
+			this.blogPosts = result as Array<Blogpost>;
 		});
 	}
 

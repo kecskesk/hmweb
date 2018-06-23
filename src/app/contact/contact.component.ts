@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-contact',
@@ -11,10 +11,10 @@ export class ContactComponent {
   newMail = new ContactMail();
   savedAlert = false;
   errorAlert: string;
-  
+
   constructor(private db: AngularFireDatabase) {
   }
-  
+
   closeAlert(): void {
     this.savedAlert = false;
     this.errorAlert = null;
@@ -26,7 +26,7 @@ export class ContactComponent {
         this.db.list('inbox').push(this.newMail).then(() => {
           this.errorAlert = null;
           this.savedAlert = true;
-          Observable.timer(2000).subscribe(() => {
+          interval(2000).subscribe(() => {
             this.savedAlert = false;
           });
           this.newMail = new ContactMail();
@@ -41,7 +41,7 @@ export class ContactComponent {
 
   setHeight(): void {
     if (document.getElementById('text')) {
-      document.getElementById('text').style.height = 
+      document.getElementById('text').style.height =
       document.getElementById('text').scrollHeight + 'px';
     }
   }
