@@ -2,7 +2,7 @@
   "rules": {
     "inbox": {
     	".write": "true",
-    	".read": "auth != null"  
+    	".read": "auth != null"
     },
     "albums": {
       ".read": "true",
@@ -16,10 +16,14 @@
       ".read": "true",
     	".write": "auth != null"
   	},
-    "blogposts": {
+    "blogPosts": {
       ".read": "true",
     	".write": "auth != null"
   	},
+    "blogposts": {
+      ".read": "true",
+      ".write": "auth != null"
+    },
     "concerts": {
       ".read": "true",
     	".write": "auth != null"

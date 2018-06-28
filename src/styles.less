@@ -7,6 +7,67 @@
     margin: 5vh;
 }
 
-textarea {
+textarea, .form-control {
     overflow: hidden;
+    background-color: #3e4451;
+    color: #C0B3A0;
+}
+
+body, a {
+    background-color: #22252C !important;
+    color: #C0B3A0 !important;
+    font-family: Helvetica;
+}
+
+.navbar-inverse {
+  background-color: #22252C;
+}
+
+.btn-link {
+  color: #C0B3A0 !important;
+  font-family: Helvetica;
+  font-size: 13pt;
+}
+
+
+
+button.btn.btn-primary {
+  background-color: #E14658;
+  border-color: #962d39;
+  &:hover, &:focus {
+    background-color: #962d39;
+  }
+}
+.navbar-inverse .navbar-nav > li {
+    a:hover, a:focus {
+        background-color: #E14658 !important;
+    }
+}
+a:hover, a:focus {
+    background-color: #E14658;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #3e4451;
+  a {
+    background-color: #3e4451 !important;
+  }
+}
+
+.navbar-header {
+    button.navbar-toggle.collapsed {
+        &:hover, &:focus {
+            background-color: #3e4451 !important;
+        }
+    }
+}
+
+.panel {
+    background-color: transparent;
+    .panel-default > .panel-heading, .panel.card.panel-default {
+        background-color: transparent;
+        &:hover, &:focus {
+            background-color: #3e4451 !important;
+        }
+    }
 }

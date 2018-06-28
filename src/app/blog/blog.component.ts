@@ -14,7 +14,7 @@ export class BlogComponent implements OnInit {
 
   constructor(db: AngularFireDatabase,
               private modalService: BsModalService) {
-		db.list('blogPosts').valueChanges().subscribe((result) => {
+		db.list('blogposts').valueChanges().subscribe((result) => {
 			this.blogPosts = result as Array<Blogpost>;
 		});
 	}
