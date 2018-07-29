@@ -9,22 +9,22 @@
 
 textarea, .form-control {
     overflow: hidden;
-    background-color: #3e4451;
-    color: #C0B3A0;
+    background-color: @andezit-light;
+    color: @caramel-brown;
 }
 
 body, a {
-    background-color: #22252C !important;
-    color: #C0B3A0 !important;
+    background-color: @andezit-dark !important;
+    color: @caramel-brown !important;
     font-family: Helvetica;
 }
 
 .navbar-inverse {
-  background-color: #22252C;
+  background-color: @andezit-dark;
 }
 
 .btn-link {
-  color: #C0B3A0 !important;
+  color: @caramel-brown !important;
   font-family: Helvetica;
   font-size: 13pt;
 }
@@ -32,32 +32,32 @@ body, a {
 
 
 button.btn.btn-primary {
-  background-color: #E14658;
-  border-color: #962d39;
+  background-color: @coral-light;
+  border-color: @coral-dark;
   &:hover, &:focus {
-    background-color: #962d39;
+    background-color: @coral-dark;
   }
 }
 .navbar-inverse .navbar-nav > li {
     a:hover, a:focus {
-        background-color: #E14658 !important;
+        background-color: @coral-light !important;
     }
 }
 a:hover, a:focus {
-    background-color: #E14658;
+    background-color: @coral-light;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #3e4451;
+  background-color: @andezit-light;
   a {
-    background-color: #3e4451 !important;
+    background-color: @andezit-light !important;
   }
 }
 
 .navbar-header {
     button.navbar-toggle.collapsed {
         &:hover, &:focus {
-            background-color: #3e4451 !important;
+            background-color: @andezit-light !important;
         }
     }
 }
@@ -67,7 +67,32 @@ a:hover, a:focus {
     .panel-default > .panel-heading, .panel.card.panel-default {
         background-color: transparent;
         &:hover, &:focus {
-            background-color: #3e4451 !important;
+            background-color: @andezit-light !important;
         }
     }
+}
+
+.modal-content {
+  background-color: @caramel-brown !important;
+  color: @andezit-dark !important;
+  .modal-header {
+    border-bottom: 0;
+  }
+}
+
+.bubble-container {
+  margin: 5vh 5vw;
+  .bubble {
+    background-color: @caramel-brown;
+    color: @andezit-dark;
+
+    padding: 5vh 5vw;
+    overflow: hidden;
+    &:hover {
+      box-shadow: 2px 2px;
+      > h2 {
+        text-decoration: underline;
+      }
+    }
+  }
 }
