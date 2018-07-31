@@ -1,7 +1,26 @@
+@import "../../_variables.less";
+
 table {
     margin: 5vw;
     width: 90vw;
+    border: 3px solid @caramel-brown;
+    border-collapse: separate;
+    border-radius: 1vh;
+    tr th {
+        background-color: @caramel-brown;
+        color: @andezit-dark;
+        border: 0;
+        text-align: center;
+    }
+    tr td {
+        border: 1px solid @caramel-brown;
+        padding: 1.5vh;
+        a {
+            text-decoration: underline;
+        }
+    }
 }
+
 
 .comment {
     white-space: pre-wrap;
