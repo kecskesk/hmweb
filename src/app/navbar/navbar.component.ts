@@ -12,7 +12,6 @@ export class NavbarComponent implements OnInit {
   routes = new Dictionary<string>();
 
 	constructor(public router: Router) {
-      this.routes['/'] = '';
       this.routes['/bio'] = 'Bemutatkozás';
       this.routes['/songs'] = 'Dalok';
       this.routes['/concert'] = 'Koncertek';

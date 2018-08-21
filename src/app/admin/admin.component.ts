@@ -11,7 +11,7 @@ import { Dictionary } from '../common/dictionary';
 export class AdminComponent implements OnInit {
   routes = new Dictionary<string>();
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, public router: Router) {
     this.routes['inbox'] = 'Levelek';
     this.routes['home'] = 'Kezdőlap';
     this.routes['bio'] = 'Bemutatkozás';

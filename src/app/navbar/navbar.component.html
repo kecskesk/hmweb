@@ -13,11 +13,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" [collapse]="isCollapsed" >
 			<ul class="nav navbar-nav">
-
 				<li *ngFor="let route of routes | dictionary" [class.active]="router.url === route.key">
 					<a [routerLink]="route.key" (click)="isCollapsed = true">
 						<span *ngIf="route.value">{{route.value}}</span>
-						<span *ngIf="!route.value"><i class="fa fa-home"></i></span>
 					</a>
 				</li>
 			</ul>
