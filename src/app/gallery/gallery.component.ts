@@ -13,11 +13,20 @@ export class GalleryComponent implements OnInit {
     imageAlbumKeys: Array<SnapshotAction<ImageAlbum>> = [];
     openAlbum: ImageAlbum;
     openAlbumKey: string;
+    GALLERY_URL = 'gallery';
 
     constructor(private storage: AngularFireStorage, private db: AngularFireDatabase) {
         this.db.list('gallery').valueChanges().subscribe((res) => {
             this.imageAlbums = res as Array<ImageAlbum>;
-        });
+            this.imageAlbums.forEach((album) => {
+              if (album.cover) {
+                const ref = this.storage.ref(this.GALLERY_URL + '/' + album.cover);
+                ref.getDownloadURL().subscribe((imageUrl) => {
+                  album.coverUrl = imageUrl;
+                });
+              }
+            });
+          });
         this.db.list('gallery').snapshotChanges().subscribe((res) => {
             this.imageAlbumKeys = res as Array<SnapshotAction<ImageAlbum>>;
         });
@@ -79,4 +88,6 @@ export class GalleryComponent implements OnInit {
 export class ImageAlbum {
     title: string;
     imageurls: any;
+    cover?: string;
+    coverUrl?: string;
 }
